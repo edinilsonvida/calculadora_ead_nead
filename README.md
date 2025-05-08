@@ -1,7 +1,7 @@
 
 # 📚 EADCalc - Planejador de Carga Horária
 
-A **EADCalc - Planejador de Carga Horária** é uma ferramenta desenvolvida pela Equipe Multidisciplinar do NEAD do IFSC – Câmpus Lages com o objetivo de auxiliar professores, coordenadores de curso e equipes pedagógicas no planejamento e dimensionamento da carga horária dedicada às atividades em Educação a Distância (EAD) em Unidades Curriculares (UCs) presenciais, híbridas ou totalmente online.
+O **EADCalc - Planejador de Carga Horária** é uma ferramenta desenvolvida pela Equipe Multidisciplinar do NEAD do IFSC – Câmpus Lages com o objetivo de auxiliar professores, coordenadores de curso e equipes pedagógicas no planejamento e dimensionamento da carga horária dedicada às atividades em Educação a Distância (EAD) em Unidades Curriculares (UCs) presenciais, híbridas ou totalmente online.
 
 ## 🚀 Funcionalidades principais
 
