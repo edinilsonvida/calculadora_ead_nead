@@ -50,4 +50,4 @@ Ferramenta desenvolvida no contexto educacional do IFSC - Câmpus Lages. Uso liv
 
 **Referência bibliográfica:**
 
-LAASER, W. (Org.). _Manual de criação e elaboração de materiais para educação a distância_. Brasília, DF: EdUnB, 1997.
+LAASER, W. (Org.). **Manual de criação e elaboração de materiais para educação a distância**. Brasília, DF: EdUnB, 1997.
