@@ -1,0 +1,29 @@
+.result-box {
+  background-color: #f8f9fa;
+  border-left: 4px solid #0d6efd;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+.form-error {
+  font-size: 0.875em;
+  color: red;
+  margin-top: 0.25rem;
+}
+small {
+  display: block;
+  font-size: 0.8em;
+  color: #6c757d;
+}
+header img {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 160px;
+}
+footer {
+  margin-top: 40px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  font-size: 0.9em;
+  color: #555;
+}
