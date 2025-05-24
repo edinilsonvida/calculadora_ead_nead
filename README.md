@@ -9,7 +9,7 @@ O **EADCalc - Planejador de Carga Horária** é uma ferramenta desenvolvida pela
 - Distribuição do tempo por tipo de conteúdo:
   - **Livro autoral** (2 páginas/hora);
   - **Curadoria de artigos** (2 páginas/hora);
-  - **Combinado** (autoral + curadoria com tempo igualmente dividido);
+  - **Combinado** (autoral + curadoria com tempo dividido);
 - Inserção personalizada do número de páginas de **múltiplos artigos**;
 - Inclusão de recursos complementares como:
   - Infográficos
@@ -19,6 +19,7 @@ O **EADCalc - Planejador de Carga Horária** é uma ferramenta desenvolvida pela
   - Atividades avaliativas
   - Encontros síncronos (1h a cada 10h EAD)
 - Cálculo do **tempo total estimado**, com aviso visual em caso de excesso ou pendência;
+- Cálculo com variação em até 30% do tamanho do conteúto;
 - **Validação obrigatória de campos** com destaque em vermelho para garantir o preenchimento correto;
 - Sugestão automática de número de **unidades de aprendizagem**, com base em 10h por unidade.
 
