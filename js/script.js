@@ -48,7 +48,7 @@ document.getElementById('formCargaHoraria').addEventListener('submit', function 
   const cargaEAD = cargaTotal * (percentualEAD / 100);
   const cargaPresencial = cargaTotal - cargaEAD;
 
-  document.getElementById('erroCarga').classList.toggle('d-none', !!cargaTotal);
+  document.getElementById('erroCarga').classList.toggle('d-none', cargaTotal > 0);
   document.getElementById('erroTipo').classList.toggle('d-none', !!tipo);
   document.getElementById('erroArtigos').classList.toggle('d-none', tipo === 'autoral' || (qtdArtigos > 0));
 
@@ -66,18 +66,21 @@ document.getElementById('formCargaHoraria').addEventListener('submit', function 
     }
   }
 
-  if (!cargaTotal || !tipo || (tipo !== 'autoral' && (!qtdArtigos || !camposArtigosValidos))) return;
+  if (isNaN(cargaTotal) || cargaTotal <= 0 || !tipo || (tipo !== 'autoral' && (!qtdArtigos || !camposArtigosValidos))) {
+    document.getElementById('erroCarga').classList.remove('d-none');
+    return;
+  }
 
   let totalHoras = 0;
   let tabela = [];
-const objetos = [
-  { id: 'infograficos', nome: 'Infográficos', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 0.25 },
-  { id: 'podcasts', nome: 'Podcasts', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 0.17 },
-  { id: 'videos', nome: 'Vídeos curtos', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 0.25 },
-  { id: 'flashcards', nome: 'Flashcards', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 0.25 },
-  { id: 'atividades', nome: 'Atividades avaliativas', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 1.75 },
-  { id: 'encontros', nome: 'Encontros remotos', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 1 }
-];
+  const objetos = [
+    { id: 'infograficos', nome: 'Infográficos', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 0.25 },
+    { id: 'podcasts', nome: 'Podcasts', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 0.17 },
+    { id: 'videos', nome: 'Vídeos curtos', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 0.25 },
+    { id: 'flashcards', nome: 'Flashcards', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 0.25 },
+    { id: 'atividades', nome: 'Atividades avaliativas', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 1.75 },
+    { id: 'encontros', nome: 'Encontros remotos', qtd: Math.floor((cargaEAD / 10) * fatorAumento), tempo: 1 }
+  ];
 
   objetos.forEach(obj => {
     if (document.getElementById(obj.id).checked) {
