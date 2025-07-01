@@ -1,168 +1,319 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>EADCalc - Planejador de Carga Horária</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/estilos.css" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>EADCalc - Planejador de Carga Horária</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="css/estilos.css" rel="stylesheet" />
-</head>
+  <body class="container py-5">
+    <header>
+      <img src="img/logo_ifsc.png" alt="Logotipo do IFSC" width="80px" />
+    </header>
 
-<body class="container py-5">
-  <header>
-    <img src="img/logo_ifsc.png" alt="Logotipo do IFSC" width="80px" />
-  </header>
+    <h2 class="mb-4 text-center">EADCalc - Planejador de Carga Horária</h2>
 
-  <h2 class="mb-4 text-center">EADCalc - Planejador de Carga Horária</h2>
+    <p class="text-center">
+      O <strong>EADCalc - Planejador de Carga Horária</strong> é uma ferramenta
+      desenvolvida pela Equipe Multidisciplinar do NEAD do IFSC - Câmpus Lages
+      com o objetivo de auxiliar professores, coordenadores de curso e equipes
+      pedagógicas no planejamento e dimensionamento da carga horária dedicada às
+      atividades em Educação a Distância (EAD) em Unidades Curriculares (UCs)
+      presenciais, híbridas ou totalmente online.
+    </p>
 
-  <p class="text-center">
-    O <strong>EADCalc - Planejador de Carga Horária</strong> é uma ferramenta
-    desenvolvida pela Equipe Multidisciplinar do NEAD do IFSC - Câmpus Lages
-    com o objetivo de auxiliar professores, coordenadores de curso e equipes
-    pedagógicas no planejamento e dimensionamento da carga horária dedicada às
-    atividades em Educação a Distância (EAD) em Unidades Curriculares (UCs)
-    presenciais, híbridas ou totalmente online.
-  </p>
-
-  <div class="card mb-4">
-    <div class="card-header bg-primary text-white">
-      <strong>Observações:</strong>
-    </div>
-    <div class="card-body">
-      <ul class="mb-0">
-        <li><strong>Livro autoral:</strong> 2 páginas por hora.</li>
-        <li>
-          <strong>Curadoria:</strong> 2 páginas por hora para leitura e
-          compreensão.
-        </li>
-        <li>
-          <strong>Opção combinada:</strong> divide o tempo entre autoral e
-          curadoria.
-        </li>
-        <li>
-          Para cada <strong>10 horas</strong> de carga horária online,
-          sugere-se a criação de <strong>1 unidade de aprendizagem</strong>.
-        </li>
-        <li>
-          Para cada <strong>10 horas</strong> de carga horária online,
-          recomenda-se a oferta de
-          <strong>1 hora de encontro síncrono</strong>.
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <form id="formCargaHoraria" novalidate>
-    <div class="mb-3">
-      <label class="form-label">Carga horária da Unidade Curricular (em horas):
-        <span class="text-danger">*</span></label>
-      <input type="number" class="form-control" id="cargaHoraria" required min="1" />
-      <div id="erroCarga" class="form-error d-none">
-        Informe a carga horária.
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        <strong>Observações:</strong>
+      </div>
+      <div class="card-body">
+        <ul class="mb-0">
+          <li><strong>Livro autoral:</strong> 2 páginas por hora.</li>
+          <li>
+            <strong>Curadoria:</strong> 2 páginas por hora para leitura e
+            compreensão.
+          </li>
+          <li>
+            <strong>Opção combinada:</strong> divide o tempo entre autoral e
+            curadoria.
+          </li>
+          <li>
+            Para cada <strong>10 horas</strong> de carga horária online,
+            sugere-se a criação de <strong>1 unidade de aprendizagem</strong>.
+          </li>
+          <li>
+            Para cada <strong>10 horas</strong> de carga horária online,
+            recomenda-se a oferta de
+            <strong>1 hora de encontro síncrono</strong>.
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="cargaParcial" onchange="alternarCargaParcial()" />
-      <label class="form-check-label" for="cargaParcial">A Unidade Curricular tem carga horária parcial em EAD?
-        (opcional)</label>
-    </div>
+    <form id="formCargaHoraria" novalidate>
+      <div class="mb-3">
+        <label class="form-label"
+          >Carga horária da Unidade Curricular (em horas):
+          <span class="text-danger">*</span></label
+        >
+        <div class="tooltip-container">
+          <span class="tooltip-icon">?</span>
+          <div class="tooltip-content">
+            Informe a carga horária total da Unidade Curricular, conforme
+            definido no Projeto Pedagógico do Curso. Este é o ponto de partida
+            para o cálculo da carga horária em EAD.
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          id="cargaHoraria"
+          required
+          min="1"
+        />
+        <div id="erroCarga" class="form-error d-none">
+          Informe a carga horária.
+        </div>
+      </div>
 
-    <div class="mb-3" id="campoPercentual" style="display: none">
-      <label class="form-label">Informe o percentual da carga horária em EAD da Unidade Curricular
-        descrito no Projeto Pedagógico de Curso:
-        <span class="text-danger">*</span></label>
-      <input type="number" class="form-control" id="percentualEAD" min="1" max="100" value="10" />
-      <div id="erroPercentual" class="form-error d-none">
-        Informe um percentual válido entre 1 e 100.
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="cargaParcial"
+          onchange="alternarCargaParcial()"
+        />
+        <label class="form-check-label" for="cargaParcial"
+          >A Unidade Curricular tem carga horária parcial em EAD?
+          (opcional)</label
+        >
+        <div class="tooltip-container">
+          <span class="tooltip-icon">?</span>
+          <div class="tooltip-content">
+            Marque esta opção se a Unidade Curricular for híbrida ou tiver uma
+            parte da carga horária dedicada a EAD. Se for totalmente presencial
+            ou totalmente online, deixe desmarcado.
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="mb-3">
-      <label class="form-label">Tipo de conteúdo principal: <span class="text-danger">*</span></label>
-      <select class="form-select" id="tipoLivro" required onchange="alternarCamposArtigos()">
-        <option value="">Selecione</option>
-        <option value="autoral">Livro autoral</option>
-        <option value="curadoria">Curadoria de artigos</option>
-        <option value="combinado">Combinado (autoral + curadoria)</option>
-      </select>
-      <div id="erroTipo" class="form-error d-none">Selecione uma opção.</div>
-    </div>
+      <div class="mb-3" id="campoPercentual" style="display: none">
+        <label class="form-label"
+          >Informe o percentual da carga horária em EAD da Unidade Curricular
+          descrito no Projeto Pedagógico de Curso:
+          <span class="text-danger">*</span></label
+        >
+        <div class="tooltip-container">
+          <span class="tooltip-icon">?</span>
+          <div class="tooltip-content">
+            Se a opção anterior foi marcada, insira aqui o percentual da carga
+            horária total que será desenvolvida a distância, conforme
+            estabelecido no PPC.
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          id="percentualEAD"
+          min="1"
+          max="100"
+          value="10"
+        />
+        <div id="erroPercentual" class="form-error d-none">
+          Informe um percentual válido entre 1 e 100.
+        </div>
+      </div>
 
-    <div class="mb-3" id="artigoConfig" style="display: none">
-      <label class="form-label">Quantos artigos deseja incluir?
-        <span class="text-danger">*</span></label>
-      <input type="number" class="form-control" id="qtdArtigos" min="1" onchange="gerarCampos()" />
-      <div id="erroArtigos" class="form-error d-none">
-        Informe o número de artigos.
+      <div class="mb-3">
+        <label class="form-label"
+          >Tipo de conteúdo principal: <span class="text-danger">*</span></label
+        >
+        <div class="tooltip-container">
+          <span class="tooltip-icon">?</span>
+          <div class="tooltip-content">
+            Selecione o formato principal do material didático. "Livro autoral"
+            para conteúdo original, "Curadoria de artigos" para seleção de
+            materiais existentes, ou "Combinado" se usar ambos.
+          </div>
+        </div>
+        <select
+          class="form-select"
+          id="tipoLivro"
+          required
+          onchange="alternarCamposArtigos()"
+        >
+          <option value="">Selecione</option>
+          <option value="autoral">Livro autoral</option>
+          <option value="curadoria">Curadoria de artigos</option>
+          <option value="combinado">Combinado (autoral + curadoria)</option>
+        </select>
+        <div id="erroTipo" class="form-error d-none">Selecione uma opção.</div>
       </div>
-      <div id="camposArtigos" class="mt-3"></div>
-    </div>
 
-    <div class="mb-3">
-      <label class="form-label">Objetos de aprendizagem/recursos (opcional):</label>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="infograficos" /><label
-          class="form-check-label">Infográficos</label><small>15 min (0,25h)</small>
+      <div class="mb-3" id="artigoConfig" style="display: none">
+        <label class="form-label"
+          >Quantos artigos deseja incluir?
+          <span class="text-danger">*</span></label
+        >
+        <div class="tooltip-container">
+          <span class="tooltip-icon">?</span>
+          <div class="tooltip-content">
+            Se você escolheu "Curadoria de artigos" ou "Combinado", informe o
+            número de artigos que serão utilizados. Isso ajudará a dimensionar o
+            tempo de leitura e compreensão.
+          </div>
+        </div>
+        <input
+          type="number"
+          class="form-control"
+          id="qtdArtigos"
+          min="1"
+          onchange="gerarCampos()"
+        />
+        <div id="erroArtigos" class="form-error d-none">
+          Informe o número de artigos.
+        </div>
+        <div id="camposArtigos" class="mt-3"></div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="podcasts" /><label
-          class="form-check-label">Podcasts</label><small>10 min (0,17h)</small>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="videos" /><label class="form-check-label">Vídeos
-          curtos</label><small>15 min (0,25h)</small>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="flashcards" /><label
-          class="form-check-label">Flashcards</label><small>15 min (0,25h)</small>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="atividades" /><label class="form-check-label">Atividades
-          avaliativas</label><small>1h45min (1,75h)</small>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="encontros" /><label class="form-check-label">Encontros
-          remotos</label><small>1h</small>
-      </div>
-    </div>
 
-    <div class="mb-3">
-      <label class="form-label">Deseja aumentar o conteúdo textual e os objetos de
-        aprendizagem/recursos da Unidade Curricular?
-        <span class="text-danger">*</span></label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="acrescimo" id="acrescimo0" value="0" checked />
-        <label class="form-check-label" for="acrescimo0">Não (manter padrão)</label>
+      <div class="mb-3">
+        <label class="form-label"
+          >Objetos de aprendizagem/recursos (opcional):</label
+        >
+        <div class="tooltip-container">
+          <span class="tooltip-icon">?</span>
+          <div class="tooltip-content">
+            Marque os tipos de recursos adicionais que serão utilizados na
+            Unidade Curricular (infográficos, podcasts, vídeos, flashcards,
+            atividades avaliativas, encontros remotos). Cada um tem um tempo
+            estimado de dedicação.
+          </div>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="infograficos"
+          /><label class="form-check-label">Infográficos</label
+          ><small>15 min (0,25h)</small>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="podcasts" /><label
+            class="form-check-label"
+            >Podcasts</label
+          ><small>10 min (0,17h)</small>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="videos" /><label
+            class="form-check-label"
+            >Vídeos curtos</label
+          ><small>15 min (0,25h)</small>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="flashcards"
+          /><label class="form-check-label">Flashcards</label
+          ><small>15 min (0,25h)</small>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="atividades"
+          /><label class="form-check-label">Atividades avaliativas</label
+          ><small>1h45min (1,75h)</small>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="encontros"
+          /><label class="form-check-label">Encontros remotos</label
+          ><small>1h</small>
+        </div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="acrescimo" id="acrescimo10" value="10" />
-        <label class="form-check-label" for="acrescimo10">Aumentar 10%</label>
+
+      <div class="mb-3">
+        <label class="form-label"
+          >Deseja aumentar o conteúdo textual e os objetos de
+          aprendizagem/recursos da Unidade Curricular?
+          <span class="text-danger">*</span></label
+        >
+        <div class="tooltip-container">
+          <span class="tooltip-icon">?</span>
+          <div class="tooltip-content">
+            Escolha se deseja adicionar um percentual extra de conteúdo e
+            recursos. Isso pode ser útil para aprofundar temas ou oferecer mais
+            opções de estudo aos alunos.
+          </div>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="acrescimo"
+            id="acrescimo0"
+            value="0"
+            checked
+          />
+          <label class="form-check-label" for="acrescimo0"
+            >Não (manter padrão)</label
+          >
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="acrescimo"
+            id="acrescimo10"
+            value="10"
+          />
+          <label class="form-check-label" for="acrescimo10">Aumentar 10%</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="acrescimo"
+            id="acrescimo20"
+            value="20"
+          />
+          <label class="form-check-label" for="acrescimo20">Aumentar 20%</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="acrescimo"
+            id="acrescimo30"
+            value="30"
+          />
+          <label class="form-check-label" for="acrescimo30">Aumentar 30%</label>
+        </div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="acrescimo" id="acrescimo20" value="20" />
-        <label class="form-check-label" for="acrescimo20">Aumentar 20%</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="acrescimo" id="acrescimo30" value="30" />
-        <label class="form-check-label" for="acrescimo30">Aumentar 30%</label>
-      </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary">Calcular</button>
-  </form>
+      <button type="submit" class="btn btn-primary">Calcular</button>
+    </form>
 
-  <div id="resultado" class="result-box d-none mt-4"></div>
+    <div id="resultado" class="result-box d-none mt-4"></div>
 
-  <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <footer>
-    Ferramenta desenvolvida por Edinilson Vida da Equipe Multidisciplinar do NEAD do IFSC -
-    Câmpus Lages.<br />
-    <strong>Referência:</strong> LAASER, W. (Org.).
-    <strong>Manual de criação e elaboração de materiais para educação a
-      distância</strong>. Brasília, DF: EdUnB, 1997.
-  </footer>
-</body>
-
+    <footer>
+      Ferramenta desenvolvida por Edinilson Vida da Equipe Multidisciplinar do
+      NEAD do IFSC - Câmpus Lages.<br />
+      <strong>Referência:</strong> LAASER, W. (Org.).
+      <strong
+        >Manual de criação e elaboração de materiais para educação a
+        distância</strong
+      >. Brasília, DF: EdUnB, 1997.
+    </footer>
+  </body>
 </html>
